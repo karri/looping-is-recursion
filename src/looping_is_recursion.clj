@@ -1,5 +1,4 @@
 (ns looping-is-recursion)
-(use 'clojure.tools.trace)
 
 (defn power [base exp]
   (let [helper (fn [acc base exp]
