@@ -5,7 +5,9 @@
   (let [helper (fn [acc base exp]
                  (if (zero? exp)
                   acc
-                  (recur (* acc base) base (dec exp))))]
+                  (recur (* acc base)
+                         base
+                         (dec exp))))]
     (helper 1 base exp))
   )
 
@@ -20,7 +22,8 @@
   (cond
    (and (empty? seq1) (empty? seq2)) true
    (some true? (map empty? [seq1 seq2])) false
-   (= (first seq1) (first seq2)) (recur (rest seq1) (rest seq2))
+   (= (first seq1) (first seq2)) (recur (rest seq1)
+                                        (rest seq2))
    :else false)
   )
 
@@ -30,7 +33,8 @@
     (cond
      (empty? seq1) nil
      (pred (first seq1)) n
-     :else (recur (rest seq1) (inc n))))
+     :else (recur (rest seq1)
+                  (inc n))))
   )
 
 (defn  avg [a-seq]
@@ -40,7 +44,9 @@
     (cond
      (and (empty? seq1) (zero? n)) nil
      (empty? seq1) (/ sum n)
-     :else (recur (rest seq1) (+ sum (first seq1)) (inc n))
+     :else (recur (rest seq1)
+                  (+ sum (first seq1))
+                  (inc n))
      ))
   )
 
@@ -53,7 +59,8 @@
            a-set #{}]
       (if (empty? seq1)
         a-set
-        (recur (rest seq1) (toggle a-set (first seq1))))))
+        (recur (rest seq1)
+               (toggle a-set (first seq1))))))
   )
 
 (defn fast-fibo [n]
@@ -64,7 +71,9 @@
      (= n 0) 0
      (= n 1) 1
      (= cur n) (+ parent grandparent)
-     :else     (recur (inc cur) (+ parent grandparent) parent)))
+     :else     (recur (inc cur)
+                      (+ parent grandparent)
+                      parent)))
   )
 
 (defn cut-at-repetition [a-seq]
@@ -74,6 +83,8 @@
     (cond
      (empty? seq1) a-vec
      (contains? a-set (first seq1)) a-vec
-     :else (recur (rest seq1) (conj a-set (first seq1)) (conj a-vec (first seq1)))))
+     :else (recur (rest seq1)
+                  (conj a-set (first seq1))
+                  (conj a-vec (first seq1)))))
   )
 
