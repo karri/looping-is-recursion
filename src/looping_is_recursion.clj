@@ -28,12 +28,12 @@
   (loop [seq1 a-seq
          n 0]
     (cond
-     (empty? a-seq) nil
-     (pred (first a-seq)) n
+     (empty? seq1) nil
+     (pred (first seq1)) n
      :else (recur (rest seq1) (inc n))))
   )
 
-(deftrace avg [a-seq]
+(defn  avg [a-seq]
   (loop [seq1 a-seq
          sum 0
          n 0]
@@ -57,8 +57,23 @@
   )
 
 (defn fast-fibo [n]
-  ":(")
+  (loop [cur 2
+         parent 1
+         grandparent 0]
+    (cond
+     (= n 0) 0
+     (= n 1) 1
+     (= cur n) (+ parent grandparent)
+     :else     (recur (inc cur) (+ parent grandparent) parent)))
+  )
 
 (defn cut-at-repetition [a-seq]
-  [":("])
+  (loop [seq1 a-seq
+         a-set #{}
+         a-vec []]
+    (cond
+     (empty? seq1) a-vec
+     (contains? a-set (first seq1)) a-vec
+     :else (recur (rest seq1) (conj a-set (first seq1)) (conj a-vec (first seq1)))))
+  )
 
